@@ -1,0 +1,46 @@
+name: Run Tests and Coverage
+
+on:
+    push:
+        branches:
+            - main # Run tests on pushes to the main branch
+    pull_request:
+        branches:
+            - main # Run tests on pull requests to the main branch
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+
+        strategy:
+            matrix:
+                node-version: [16.x, 18.x] # You can test against multiple Node.js versions
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v2
+              with:
+                  node-version: ${{ matrix.node-version }}
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: Run tests
+              run: npm run test
+
+            - name: Generate coverage
+              run: npm run coverage
+
+            - name: Upload coverage report
+              uses: actions/upload-artifact@v2
+              with:
+                  name: coverage-report
+                  path: coverage # Assuming your coverage reports are in the "coverage" folder
+
+            - name: Upload coverage to Codecov
+              uses: codecov/codecov-action@v2
+              with:
+                  token: ${{ secrets.CODECOV_TOKEN }} # Set this in GitHub Secrets

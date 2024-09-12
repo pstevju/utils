@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"target": "ESNext", // Target latest JavaScript version
+		"module": "ESNext", // Use ES module syntax
+		"moduleResolution": "Node", // Module resolution strategy
+		"declaration": true, // Generate type declaration files
+		"outDir": "dist", // Output directory for compiled files
+		"strict": true, // Enable strict type-checking options
+		"esModuleInterop": true, // Allow default imports from CommonJS
+		"skipLibCheck": true, // Skip checking of declaration files
+		"sourceMap": true, // Generate source maps for debugging
+		"jsx": "preserve", // Leave JSX untouched
+		"allowSyntheticDefaultImports": true // Allow synthetic default imports
+	},
+	"include": ["src"], // Include source files for the build
+	"exclude": ["node_modules", "dist"] // Exclude output and dependencies
+}
